@@ -1,5 +1,5 @@
-const UserDB = require('./UserDB.js');
-const UserDB = require('./warnDB.js');
+const UserDB = require('./schema/UserDB.js');
+const UserDB = require('./schema/warnDB.js');
 
     async function createUser(id){
         const user = {
