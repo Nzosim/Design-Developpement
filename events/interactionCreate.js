@@ -51,80 +51,34 @@ module.exports = {
 
             interaction.guild.channels.cache.get(config.log.logevents).send(`${interaction.user.username} a ouvert un ticket : <#${c.id}>`)
 
+        //validation de commande
+        // const service = "bot discord"
 
-
-
-
-               //validation de commande
-    const service = "bot discord"
-
-		const embedValid = new MessageEmbed()
-			.setColor('BLUE')
-			.setTitle('Validation')
-			.setDescription(`Voulez vous commander un ${service} ?`)
-			.setFooter({text: 'Bot made by Nzosim#0379', iconURL: 'https://cdn.discordapp.com/avatars/942865850602487838/45794545655611f2f2f65532d548417b.webp'})
-		const row1 = new MessageActionRow()
-			.addComponents(
-				new MessageButton()
-				.setCustomId('oui')
-				.setLabel('Oui')
-				.setStyle('PRIMARY'),
-			);
-      const row2 = new MessageActionRow()
-			.addComponents(
-				new MessageButton()
-				.setCustomId('non')
-				.setLabel('Non')
-				.setStyle('DANGER'),
-			);
-			
-			c.send({
-				embeds: [embedValid],
-				components: [row1, row2]
-			})
-
-
-
-
-
-
-
-
-
-
-
+        // const embedValid = new MessageEmbed()
+        //   .setColor('BLUE')
+        //   .setTitle('Validation')
+        //   .setDescription(`Voulez vous commander un ${service} ?`)
+        //   .setFooter({text: 'Bot made by Nzosim#0379', iconURL: 'https://cdn.discordapp.com/avatars/942865850602487838/45794545655611f2f2f65532d548417b.webp'})
+        // const row1 = new MessageActionRow()
+        //   .addComponents(
+        //     new MessageButton()
+        //     .setCustomId('oui')
+        //     .setLabel('Oui')
+        //     .setStyle('PRIMARY'),
+        //   );
+        //   const row2 = new MessageActionRow()
+        //   .addComponents(
+        //     new MessageButton()
+        //     .setCustomId('non')
+        //     .setLabel('Non')
+        //     .setStyle('DANGER'),
+        //   );
+          
+        //   c.send({
+        //     embeds: [embedValid],
+        //     components: [row1, row2]
+        //   })
         })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     if (interaction.customId == "close-ticket") {

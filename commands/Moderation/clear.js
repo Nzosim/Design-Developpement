@@ -12,14 +12,12 @@ module.exports = {
 
         const amount = interaction.options.getNumber('nombre')
 
-        const channel = interaction.channel
-
         if (amount <= 1 || amount > 100) {
             return interaction.reply({ content: `Vous pouvez seulement supprimer entre 1 et 100 messages`, ephemeral: true });
         }
       
-        channel.bulkDelete(amount, true);
+        const { size } = await interaction.channel.bulkDelete(amount, true);
 
-		return interaction.reply({ content: `${amount} messages ont été supprimés`, ephemeral: true }); // affiche pas le bon nombre, si ancien message
+		return interaction.reply({ content: `${size} messages ont été supprimés`, ephemeral: true });
 	},
-};     
+}

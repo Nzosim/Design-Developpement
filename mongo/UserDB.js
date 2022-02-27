@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const schema = new mongoose.Schema({
+const UserDB = new mongoose.Schema({
     userId: String,
     money: {
         type: Number,
@@ -14,4 +14,4 @@ const schema = new mongoose.Schema({
     roulette: Date
 })
 
-module.exports = mongoose.model('Users', schema)
+module.exports = mongoose.model('Users', UserDB)

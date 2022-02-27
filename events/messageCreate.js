@@ -1,4 +1,4 @@
-const db = require('../mongoose.js')
+const db = require('../mongo/mongoose.js')
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
@@ -10,12 +10,10 @@ module.exports = {
                 let userCreer = await db.exist(message.author.id)
                 if(userCreer) message.guild.channels.cache.get('943259188824518696').send(`Utilisateur ajouté à la base de données : ${message.author.tag}`)
 
-                //anti link
+                //anti lien 
                 if(message.content.includes('https://') || message.content.includes('http://') || message.content.includes('discord.gg')){
                         message.channel.send('Les liens sont interdit !')
-                        message.guild.channels.cache.get('943531071755128902').send({embeds: [new MessageEmbed()
-                                                                                                        .setTitle('**Anti Lien**')
-                                                                                                        .setDescription(`${message.author} à envoyé : \n\n> ${message.content}`)]})
+                        message.guild.channels.cache.get('943531071755128902').send({embeds: [new MessageEmbed().setTitle('**Anti Lien**').setDescription(`${message.author} à envoyé : \n\n> ${message.content}`)]})
                         message.delete()
                 }		
 	},

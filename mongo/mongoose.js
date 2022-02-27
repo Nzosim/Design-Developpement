@@ -1,5 +1,5 @@
-const { find } = require('./schema.js');
-const schema = require('./schema.js');
+const UserDB = require('./UserDB.js');
+const UserDB = require('./warnDB.js');
 
     async function createUser(id){
         const user = {
@@ -7,12 +7,12 @@ const schema = require('./schema.js');
             money: 0,
             xp: 0
         }
-        await new schema(user).save()
+        await new UserDB(user).save()
     }
 
     async function exist(id){
 
-        const count = await schema.find({
+        const count = await UserDB.find({
             userId: id
         }).count()
 
@@ -27,7 +27,7 @@ const schema = require('./schema.js');
 
     async function addMoney(id, number){
 
-        const moneyNow = await schema.findOneAndUpdate({
+        const moneyNow = await UserDB.findOneAndUpdate({
                 userId: id
             },{
                 $inc: {
@@ -41,7 +41,7 @@ const schema = require('./schema.js');
 
 		// let moneyNow = sto.money - number >= 0 ? sto.money - number : 0
 
-        const moneyNow = await schema.findOneAndUpdate({
+        const moneyNow = await UserDB.findOneAndUpdate({
                 userId: id
             },{
 				$inc: {
@@ -50,7 +50,7 @@ const schema = require('./schema.js');
             })
 
 		if(moneyNow.money - number < 0){
-			await schema.findOneAndUpdate({
+			await UserDB.findOneAndUpdate({
                 userId: id
             },{
 				money: 0
@@ -61,7 +61,7 @@ const schema = require('./schema.js');
     }
 
 	async function seeMoney(id){
-		const result = await schema.find({
+		const result = await UserDB.find({
 			userId: id
 		})
 		return result[0].money
