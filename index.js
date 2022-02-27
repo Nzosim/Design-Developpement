@@ -1,0 +1,54 @@
+const fs = require('fs');
+const { Client, Collection, Intents, MessageEmbed, Message } = require('discord.js');
+const mongoose = require('mongoose');
+const config = require('./config.json');
+
+const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
+client.commands = new Collection();
+client.login(config.token);
+
+
+const commandFolders = fs.readdirSync("./commands");
+
+for (const folder of commandFolders) {
+	const commandFiles = fs
+	  .readdirSync(`./commands/${folder}`)
+	  .filter((file) => file.endsWith(".js"));
+	for (const file of commandFiles) {
+		const command = require(`./commands/${folder}/${file}`);
+		client.commands.set(command.data.name, command);
+	}
+}
+
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
+}
+
+
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+	const command = client.commands.get(interaction.commandName);
+	if (!command) return;
+	interaction.guild.channels.cache.get(config.log.logcommands).send(`${interaction.user.tag} a effectué la commande "${interaction.commandName}" dans le channel #${interaction.channel.name}`)
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
+});
+
+
+client.on('ready', async () => {
+	await mongoose.connect('mongodb+srv://DesignDeveloppement:86t5mnhVQDaTfqzV@designdeveloppement.di8ct.mongodb.net/DesignDeveloppement?retryWrites=true&w=majority', {
+		keepAlive: true
+	}).then(console.log('MongoDB connected'))
+})
