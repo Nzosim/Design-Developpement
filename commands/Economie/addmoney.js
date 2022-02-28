@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const db = require('../../mongoose.js')
+const db = require('../../user.js')
 const Discord = require('Discord.js')
 const config = require('../../config.json')
 
