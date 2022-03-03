@@ -1,4 +1,4 @@
-const db = require('../mongo/mongoose.js')
+const db = require('../mongo/user.js')
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
