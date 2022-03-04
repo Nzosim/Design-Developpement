@@ -19,7 +19,7 @@ module.exports = {
 
         if (user.id === interaction.guild.ownerID) return interaction.reply({ content: 'Vous ne pouvez pas warn le propriétaire du serveur', ephemeral: true })
 
-        db.warn(await db.numberWarn(user.id)+1, user.id, raison, Date.now(), interaction.user.id)
+        db.warn(await db.numberWarn(user.id)+1, user.id, raison, Date.now(), interaction.user.username)
         
         const embed = new MessageEmbed()
             .setTitle(`[WARN] ${user.tag}`)

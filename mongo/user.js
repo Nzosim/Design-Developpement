@@ -66,7 +66,7 @@ const UserDB = require('./schema/userDB.js');
 		return result[0].money
 	} 
 
-    module.exports = { createUser, exist, addMoney, removeMoney, seeMoney };
+module.exports = { createUser, exist, addMoney, removeMoney, seeMoney };
 
 
     // const schema = new mongoose.Schema({

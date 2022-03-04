@@ -3,7 +3,7 @@ const { Client, Collection, Intents, MessageEmbed, Message } = require('discord.
 const mongoose = require('mongoose');
 const config = require('./config.json');
 
-const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
+const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "GUILD_PRESENCES"] });
 client.commands = new Collection();
 client.login(config.token);
 

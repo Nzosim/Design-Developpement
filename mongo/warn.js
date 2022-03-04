@@ -1,12 +1,13 @@
-const warnDB = require('./schema/warnDB.js');
+const warnDB = require('./schema/warnDB.js'),
+    moment = require('moment');
 
-    async function warn(nbr, userId, raison, date, modoId){
+    async function warn(nbr, userId, raison, date, modo){
         const user = {
             number: nbr,
         	userId: userId,
             reason: raison,
             date: date,
-            modo: modoId
+            modo: modo
         }
         await new warnDB(user).save()
     }
@@ -40,5 +41,15 @@ const warnDB = require('./schema/warnDB.js');
         }
     }
 
+    async function checkwarn(userId){
+        const result = await warnDB.find({
+			userId: userId
+		})
+        let res = "";
+        for(let i = 0 ; i < result.length ; i++){
+            res += "**"+result[i].number+". Raison :**\n"+result[i].reason+"\n**Date :**\n"+moment(result[i].date).fromNow()+"\n**Modérateur :**\n"+result[i].modo+"\n\n";
+        }
+        return res;
+    }
 
-    module.exports = { warn, numberWarn, unwarn };
+module.exports = { warn, numberWarn, unwarn, checkwarn };
