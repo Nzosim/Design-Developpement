@@ -20,5 +20,11 @@
         "ticketGraphiste": "793461138016174090",
         "ticketSupport": "819877503837274123",
         "categorieTicket": "819869746593136670"
-    }
+    },
+    "antiLien": ["https://","http://","discord.gg/"],
+    "activite": {
+        "type": "WATCHING",
+        "message": "vos messages"
+    },
+    "prefix": "./"
 }

@@ -15,12 +15,20 @@ const UserDB = require('./schema/userDB.js');
             userId: id
         }).count()
 
+		let res = false
         if(count == 0) {
             createUser(id)
-            return true
-        }else{
-            return false
+            res = true
         }
+		return res
+
+    }
+
+	async function remove(id){
+
+		await UserDB.deleteOne({
+			userId: id
+		})
 
     }
 
@@ -66,7 +74,7 @@ const UserDB = require('./schema/userDB.js');
 		return result[0].money
 	} 
 
-module.exports = { createUser, exist, addMoney, removeMoney, seeMoney };
+module.exports = { createUser, exist, remove, addMoney, removeMoney, seeMoney };
 
 
     // const schema = new mongoose.Schema({

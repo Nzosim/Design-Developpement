@@ -1,27 +1,38 @@
-const { MessageEmbed } = require("discord.js")
-const config = require('../config.json')
+const config = require('../config.json'),
+    db = require('../mongo/user.js')
 
 module.exports = {
 	name: 'guildMemberAdd',
-	execute(member) {
-        // member.guild.channels.cache.get(config.event.join).send(`${member.user} vient de nous rejoindre. Il a été invité par ${} qui a désormais ${} invitations`)
+	async execute(member) {
+
+        /*
+        * Permet d'ajouter à la base de donnée les utilisateurs qui rejoigne le serveur 
+        */
+        await db.createUser(member.id)
+        return member.guild.channels.cache.get(config.log.logmongo).send(`Utilisateur ajouté à la base de données : ${member.user.tag}`)
+        
 	},
 };
 
 
+// member.guild.channels.cache.get(config.event.join).send(`${member.user} vient de nous rejoindre. Il a été invité par ${} qui a désormais ${} invitations`)
 
-module.exports = async (member) => {
 
 
-    const embed = new MessageEmbed()
-    .setTitle('Member Joined')
-    .setDescription(`User: ${member.user.tag} (${member})\nUser ID: ${member.id}\nAcc. Created: ${member.user.createdAt}\nServer Mmebr Count: ${member.guild.memberCount}`)
-    .setColor("GREEN")
-    .setTimestamp()
-    .setThumbnail(`${member.user.avatarURL}`)
 
-    member.guild.channels.cache.get(data.ChannelID).send({ embeds: [embed]})
-}
+
+// module.exports = async (member) => {
+
+
+//     const embed = new MessageEmbed()
+//     .setTitle('Member Joined')
+//     .setDescription(`User: ${member.user.tag} (${member})\nUser ID: ${member.id}\nAcc. Created: ${member.user.createdAt}\nServer Mmebr Count: ${member.guild.memberCount}`)
+//     .setColor("GREEN")
+//     .setTimestamp()
+//     .setThumbnail(`${member.user.avatarURL}`)
+
+//     member.guild.channels.cache.get(data.ChannelID).send({ embeds: [embed]})
+// }
 
 
 // client.on("guildMemberAdd", member => {

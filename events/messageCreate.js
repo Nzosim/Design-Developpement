@@ -1,21 +1,26 @@
-const db = require('../mongo/user.js')
-const { MessageEmbed } = require('discord.js');
+const db = require('../mongo/user.js'),
+        { MessageEmbed } = require('discord.js'),
+        config = require('../config.json')
 
 module.exports = {
-	name: 'messageCreate',
+        name: 'messageCreate',
 	async execute(message) {
+
                 if(message.author.bot) return
 
-                //permet d'ajouter à la base de donnée les personnes qui n'y sont pas
-                let userCreer = await db.exist(message.author.id)
-                if(userCreer) message.guild.channels.cache.get('943259188824518696').send(`Utilisateur ajouté à la base de données : ${message.author.tag}`)
-
-                //anti lien 
-                if(message.content.includes('https://') || message.content.includes('http://') || message.content.includes('discord.gg')){
-                        if(message.author.id = message.guild.ownerId) return 
-                        message.channel.send('Les liens sont interdit !')
-                        message.guild.channels.cache.get('943531071755128902').send({embeds: [new MessageEmbed().setTitle('**Anti Lien**').setDescription(`${message.author} à envoyé : \n\n> ${message.content}`)]})
-                        message.delete()
-                }		
+                /*
+                * Anti-lien
+                */
+                if(message.author.id = message.guild.ownerId) return // autorise l'owner à envoyer des liens 
+                for(let i = 0 ; i < config.antiLien.length ; i++){
+                        if(message.content.includes(config.antiLien[i])){
+                                message.channel.send('Les liens sont interdit !')
+                                message.guild.channels.cache.get(config.log.logevents).send({embeds: [new MessageEmbed()
+                                        .setTitle('**Anti Lien**')
+                                        .setDescription(`${message.author} à envoyé : \n\n> ${message.content}`)]})
+                                message.delete()
+                        }
+                }
+		
 	},
 };

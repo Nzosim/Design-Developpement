@@ -1,6 +1,5 @@
 const fs = require('fs');
 const { Client, Collection, Intents, MessageEmbed, Message } = require('discord.js');
-const mongoose = require('mongoose');
 const config = require('./config.json');
 
 const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "GUILD_PRESENCES"] });
@@ -47,8 +46,16 @@ client.on('interactionCreate', async interaction => {
 });
 
 
-client.on('ready', async () => {
-	await mongoose.connect('mongodb+srv://DesignDeveloppement:86t5mnhVQDaTfqzV@designdeveloppement.di8ct.mongodb.net/DesignDeveloppement?retryWrites=true&w=majority', {
-		keepAlive: true
-	}).then(console.log('MongoDB connected'))
-})
+
+// client.on('messageCreate', message => {
+
+//     if (message.author.bot) return
+//     const args = message.content.trim().split(/ +/g)
+//     const commandName = args.shift().toLowerCase()
+//     if (!commandName.startsWith(config.prefix)) return
+//     const command = client.commands.get(commandName.slice(config.prefix.length))
+//     if (!command) return
+// 	console.log("qsefg")
+//     command.execute(message)
+	
+// })

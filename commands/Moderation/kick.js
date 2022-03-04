@@ -36,7 +36,7 @@ module.exports = {
       .setDescription("Si vous pensez que cette sanction est une erreur veuillez répondre à ce message")
     
     await user.send({ embeds: [embedUser]}).catch(() => {})
-    await user.kick().then(() => {interaction.reply({ embeds: [embed], ephemeral: true  })});
+    await user.kick(raison)
     return interaction.guild.channels.cache.get(config.log.sanctions).send({ embeds: [embed]})
   },
 }
