@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow, MessageButton, CommandInteractionOptionResolver } = require('discord.js');
+const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const config = require('../config.json')
 
 module.exports = {

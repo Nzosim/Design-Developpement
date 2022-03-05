@@ -4,11 +4,18 @@ const UserDB = new mongoose.Schema({
     userId: String,
     money: {
         type: Number,
-        min: 0
+        min: 0,
+        default: 0
     },
     xp: {
         type: Number,
-        min: 0
+        min: 0,
+        default: 0
+    },
+    level: {
+        type: Number,
+        min: 0,
+        default: 0
     },
     daily: Date,
     roulette: Date

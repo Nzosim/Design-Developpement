@@ -11,6 +11,7 @@
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",
+    "canvacord": "^5.2.3",
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
     "humanize-duration": "^3.27.1",

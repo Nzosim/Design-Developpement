@@ -2,9 +2,7 @@ const UserDB = require('./schema/userDB.js');
 
     async function createUser(id){
         const user = {
-        	userId: id,
-            money: 0,
-            xp: 0
+        	userId: id
         }
         await new UserDB(user).save()
     }
