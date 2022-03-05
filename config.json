@@ -26,5 +26,7 @@
         "type": "WATCHING",
         "message": "vos messages"
     },
-    "prefix": "./"
+    "prefix": "./",
+    "sugestion": "942837498495791124",
+    "embedColor" : "#7B097C"
 }

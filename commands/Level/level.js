@@ -21,11 +21,11 @@ module.exports = {
             .setAvatar(user.displayAvatarURL({dynamic: false, format: 'png'}))
             .setCurrentXP(result.xp)
             .setRequiredXP(db.getNeededXP(result.level))
-            .setProgressBar("#AAAAAA", "COLOR")
+            .setProgressBar("#7B097C")
             .setUsername(user.username)
             .setDiscriminator(user.discriminator)
             .setLevel(result.level)
-            .setRank(number);
+            .setRank(number)
 
         rank.build().then(data => {
             const attachment = new Discord.MessageAttachment(data, "RankCard.png");

@@ -5,8 +5,11 @@ module.exports = {
   name: 'interactionCreate',
   async execute(interaction, client) {
 
+    /*
+    * Réponse après un clique sur un bouton
+    */ 
     if (!interaction.isButton()) return;
-
+    // ouverture de ticket
     if (interaction.customId == "ticket-support" || interaction.customId == "ticket-bot" || interaction.customId == "ticket-serveur" || interaction.customId == "ticket-graphiste") {
         if (interaction.guild.channels.cache.find(c => c.topic == interaction.user.id)) {
             interaction.guild.channels.cache.get(config.log.logevents).send(`${interaction.user.username} a essayé d'ouvrir un deuxième ticket`)
@@ -50,37 +53,9 @@ module.exports = {
             })
 
             interaction.guild.channels.cache.get(config.log.logevents).send(`${interaction.user.username} a ouvert un ticket : <#${c.id}>`)
-
-        //validation de commande
-        // const service = "bot discord"
-
-        // const embedValid = new MessageEmbed()
-        //   .setColor('BLUE')
-        //   .setTitle('Validation')
-        //   .setDescription(`Voulez vous commander un ${service} ?`)
-        //   .setFooter({text: 'Bot made by Nzosim#0379', iconURL: 'https://cdn.discordapp.com/avatars/942865850602487838/45794545655611f2f2f65532d548417b.webp'})
-        // const row1 = new MessageActionRow()
-        //   .addComponents(
-        //     new MessageButton()
-        //     .setCustomId('oui')
-        //     .setLabel('Oui')
-        //     .setStyle('PRIMARY'),
-        //   );
-        //   const row2 = new MessageActionRow()
-        //   .addComponents(
-        //     new MessageButton()
-        //     .setCustomId('non')
-        //     .setLabel('Non')
-        //     .setStyle('DANGER'),
-        //   );
-          
-        //   c.send({
-        //     embeds: [embedValid],
-        //     components: [row1, row2]
-        //   })
         })
     }
-
+    // fermeture de ticket
     if (interaction.customId == "close-ticket") {
       const chan = interaction.guild.channels.cache.get(interaction.channelId);
       const row = new MessageActionRow()
@@ -157,3 +132,41 @@ module.exports = {
 
 }
 }
+
+
+
+
+
+
+
+
+
+
+
+//validation de commande
+        // const service = "bot discord"
+
+        // const embedValid = new MessageEmbed()
+        //   .setColor('BLUE')
+        //   .setTitle('Validation')
+        //   .setDescription(`Voulez vous commander un ${service} ?`)
+        //   .setFooter({text: 'Bot made by Nzosim#0379', iconURL: 'https://cdn.discordapp.com/avatars/942865850602487838/45794545655611f2f2f65532d548417b.webp'})
+        // const row1 = new MessageActionRow()
+        //   .addComponents(
+        //     new MessageButton()
+        //     .setCustomId('oui')
+        //     .setLabel('Oui')
+        //     .setStyle('PRIMARY'),
+        //   );
+        //   const row2 = new MessageActionRow()
+        //   .addComponents(
+        //     new MessageButton()
+        //     .setCustomId('non')
+        //     .setLabel('Non')
+        //     .setStyle('DANGER'),
+        //   );
+          
+        //   c.send({
+        //     embeds: [embedValid],
+        //     components: [row1, row2]
+        //   })

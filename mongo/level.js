@@ -22,8 +22,6 @@ async function addXp(memberId, xpToAdd, message){
 
     let xp = result.xp, level = result.level
     const needed = getNeededXP(level)
-
-    console.log(xp + " "+needed+" "+level)
         
     if (xp >= needed) {
         level++
@@ -46,10 +44,17 @@ async function getLevel(userId){
 }
 
 async function getTop(userId){
-    // const result = await UserDB.find({}).sort({
-    //     	xp: -1 // plus grand au plus petit, 1 = l'inverse
-    //     })
-    return 10
+  const result = await UserDB.find({}).sort({
+    xp: -1 
+  })
+  let place;
+  for(let i = 0 ; i < result.length ; i++){
+    if(result[i].userId == userId){
+      place = i+1;
+      break;
+    }
+  }
+  return place
 }
 
 module.exports = { getNeededXP, addXp, getLevel, getTop };
