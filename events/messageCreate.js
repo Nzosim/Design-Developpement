@@ -2,7 +2,8 @@ const db = require('../mongo/level.js'),
         dbU = require('../mongo/user.js'),
         { MessageEmbed } = require('discord.js'),
         config = require('../config.json'),
-        AntiSpam = require("discord-anti-spam");
+        AntiSpam = require("discord-anti-spam"),
+        extfile = require("extfile.js")
 
 module.exports = {
         name: 'messageCreate',
@@ -10,11 +11,14 @@ module.exports = {
 
                 if(message.author.bot) return
 
+                let delBot = false;
+
                 /*
                 * Anti-lien
                 */
                 for(let i = 0 ; i < config.antiLien.length ; i++){
                         if(message.content.includes(config.antiLien[i]) && message.author.id != message.guild.ownerId){
+                                delBot = true
                                 message.channel.send('Les liens sont interdit !')
                                 message.guild.channels.cache.get(config.log.logevents).send({embeds: [new MessageEmbed()
                                         .setTitle('**Anti Lien**')
@@ -32,6 +36,7 @@ module.exports = {
                 * Système de sugestion
                 */
                 if(message.channel.id == config.sugestion){
+                        delBot = true
                         const mess = message.content
                         const author = message.author
 
@@ -73,5 +78,13 @@ module.exports = {
                 //         modLogsMode: "embed",
                 //       })
                 //       antiSpam.message(message)
+
+
+                function del(){
+                        return delBot
+                }
+
+                module.exports = { del };
+
 	},
 }
