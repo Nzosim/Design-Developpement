@@ -1,5 +1,10 @@
 const UserDB = require('./schema/userDB.js');
 
+/*
+* Permet de connaitre l'xp nécessaire pour chaque niveau
+* @param level niveau pour lequel rechercher l'xp nécessaire
+* @return xp nécessaire
+*/
 const getNeededXP = (level) => level * level * 100
 
 /*
@@ -39,10 +44,20 @@ async function addXp(memberId, xpToAdd, message){
 
 }
 
+/*
+* Permet de connaitre le niveau d'un membre
+* @param userId id du membre
+* @return son niveau
+*/
 async function getLevel(userId){
     return await UserDB.findOne({ userId: userId })
 }
 
+/*
+* Permet de connaitre le rank d'un membre
+* @param membre à rechercher
+* @return rank du membre
+*/
 async function getTop(userId){
   const result = await UserDB.find({}).sort({
     xp: -1 
@@ -57,6 +72,16 @@ async function getTop(userId){
   return place
 }
 
-module.exports = { getNeededXP, addXp, getLevel, getTop };
+/*
+* Permet de connaitre le top 10 des membres du serveur
+* @return le top 10
+*/
+async function getLeader(){
+  return result = await UserDB.find({}).sort({
+    xp: -1
+  }).limit(10)
+}
+
+module.exports = { getNeededXP, addXp, getLevel, getTop, getLeader };
 
         

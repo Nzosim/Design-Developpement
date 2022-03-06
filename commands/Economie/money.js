@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const db = require('../../mongo/user.js')
-const Discord = require('Discord.js')
+const dbMoney = require('../../mongo/money.js')
 const config = require('../../config.json')
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
         let userCreer = await db.exist(user.id)
         if(userCreer) interaction.guild.channels.cache.get(config.log.logmongo).send(`Utilisateur ajouté à la base de données : ${user.tag}`)
 
-        const money = await db.seeMoney(user.id)
+        const money = await dbMoney.seeMoney(user.id)
         interaction.guild.channels.cache.get(config.log.logmongo).send(`${user.tag} à actuellement : **${money} D&D**.`)
 
         return interaction.reply({ content: `Vous avez actuellement : **${money} D&D**.`});

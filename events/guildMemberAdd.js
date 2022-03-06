@@ -8,7 +8,7 @@ module.exports = {
         /*
         * Permet d'ajouter à la base de donnée les utilisateurs qui rejoigne le serveur 
         */
-        await db.createUser(member.id)
+        await db.createUser(member.id, member.user.username)
         return member.guild.channels.cache.get(config.log.logmongo).send(`Utilisateur ajouté à la base de données : ${member.user.tag}`)
         
 	},

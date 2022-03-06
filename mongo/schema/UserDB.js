@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const UserDB = new mongoose.Schema({
     userId: String,
+    name: String,
     money: {
         type: Number,
         min: 0,

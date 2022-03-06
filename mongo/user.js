@@ -1,78 +1,45 @@
 const UserDB = require('./schema/userDB.js');
 
-    async function createUser(id){
-        const user = {
-        	userId: id
-        }
-        await new UserDB(user).save()
+/*
+* Permet d'ajouter un utilisateur à la base de données
+* @param id identifiant du membre
+*/
+async function createUser(id, name){
+    const user = {
+    	userId: id,
+		name: name
     }
+    await new UserDB(user).save()
+}
 
-    async function exist(id){
-
-        const count = await UserDB.find({
-            userId: id
-        }).count()
-
-		let res = false
-        if(count == 0) {
-            createUser(id)
-            res = true
-        }
-		return res
-
+/*
+* Permet de voir si un utilisateur fait partie de la base de données
+* @param id identifiant du membre
+* @return si oui ou non il existe
+*/
+async function exist(id, name){
+    const count = await UserDB.find({
+        userId: id
+    }).count()
+	let res = false
+    if(count == 0) {
+        createUser(id, name)
+        res = true
     }
+	return res
+}
 
-	async function remove(id){
+/*
+* Permet de retirer un utilisateur de la base de données
+* @param id identifiant du membre
+*/
+async function remove(id){
+	await UserDB.deleteOne({
+		userId: id
+	})
+}
 
-		await UserDB.deleteOne({
-			userId: id
-		})
-
-    }
-
-    async function addMoney(id, number){
-
-        const moneyNow = await UserDB.findOneAndUpdate({
-                userId: id
-            },{
-                $inc: {
-                    money: number
-                }
-            })
-		return moneyNow.money + number
-    }
-
-	async function removeMoney(id, number){
-
-		// let moneyNow = sto.money - number >= 0 ? sto.money - number : 0
-
-        const moneyNow = await UserDB.findOneAndUpdate({
-                userId: id
-            },{
-				$inc: {
-					money: -number
-				}
-            })
-
-		if(moneyNow.money - number < 0){
-			await UserDB.findOneAndUpdate({
-                userId: id
-            },{
-				money: 0
-            })
-		}
-
-		return moneyNow.money - number > 0 ? moneyNow.money - number : 0 
-    }
-
-	async function seeMoney(id){
-		const result = await UserDB.find({
-			userId: id
-		})
-		return result[0].money
-	} 
-
-module.exports = { createUser, exist, remove, addMoney, removeMoney, seeMoney };
+module.exports = { createUser, exist, remove };
 
 
     // const schema = new mongoose.Schema({

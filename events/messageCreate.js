@@ -2,8 +2,15 @@ const db = require('../mongo/level.js'),
         dbU = require('../mongo/user.js'),
         { MessageEmbed } = require('discord.js'),
         config = require('../config.json'),
-        AntiSpam = require("discord-anti-spam"),
-        extfile = require("extfile.js")
+        AntiSpam = require("discord-anti-spam")
+
+/*
+* Permet d'indiquer à messageDelete que le bot a supprimé le message et que ce n'est pas un utilisateur
+*/
+let delBot = false;
+function del(){
+        return delBot
+}
 
 module.exports = {
         name: 'messageCreate',
@@ -11,7 +18,7 @@ module.exports = {
 
                 if(message.author.bot) return
 
-                let delBot = false;
+                await dbU.createUser(message.author.id, message.author.username)
 
                 /*
                 * Anti-lien
@@ -52,6 +59,7 @@ module.exports = {
                                 .then(msg => {
                                         msg.react('✅')
                                         msg.react('❌')
+                                        message.delete()
                                 })
                 }
 
@@ -79,12 +87,5 @@ module.exports = {
                 //       })
                 //       antiSpam.message(message)
 
-
-                function del(){
-                        return delBot
-                }
-
-                module.exports = { del };
-
-	},
+	}, del
 }
