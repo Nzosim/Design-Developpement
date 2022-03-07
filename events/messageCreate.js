@@ -18,7 +18,7 @@ module.exports = {
 
                 if(message.author.bot) return
 
-                await dbU.createUser(message.author.id, message.author.username)
+                // await dbU.createUser(message.author.id, message.author.username)
 
                 /*
                 * Anti-lien
