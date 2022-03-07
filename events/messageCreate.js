@@ -18,7 +18,10 @@ module.exports = {
 
                 if(message.author.bot) return
 
-                // await dbU.createUser(message.author.id, message.author.username)
+                /*
+                * Ajoute à la base de données les personnes qui n'y sont pas 
+                */
+                dbU.exist(message.author.id, message.author.username)
 
                 /*
                 * Anti-lien
