@@ -9,7 +9,29 @@ module.exports = {
         * Permet d'ajouter à la base de donnée les utilisateurs qui rejoigne le serveur 
         */
         await db.createUser(member.id, member.user.username)
-        return member.guild.channels.cache.get(config.log.logmongo).send(`Utilisateur ajouté à la base de données : ${member.user.tag}`)
+        member.guild.channels.cache.get(config.log.logmongo).send(`Utilisateur ajouté à la base de données : ${member.user.tag}`)
+
+        /*
+        * Message lorsqu'un membre join le serveur
+        */
+        member.guild.invites.fetch().then(newInvites => {
+            // This is the *existing* invites for the guild.
+            const oldInvites = invites.get(member.guild.id);
+            // Look through the invites, find the one for which the uses went up.
+            const invite = newInvites.find(i => i.uses > oldInvites.get(i.code));
+            // This is just to simplify the message being sent below (inviter doesn't have a tag property)
+            const inviter = client.users.cache.get(invite.inviter.id);
+            // Get the log channel (change to your liking)
+            const logChannel = member.guild.channels.cache.get(config.joinAndLeave)
+            // A real basic message with the information we need. 
+            inviter ? logChannel.send(`${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`)
+                : logChannel.send(`${member.user.tag} joined but I couldn't find through which invite.`);
+          });
+
+        /*
+        * Changement du channel : nombre de membre
+        */
+        return member.guild.channels.cache.get(config.memberCount).edit({ name: `Membre : ${member.guild.memberCount}` })
         
 	},
 };
@@ -33,22 +55,3 @@ module.exports = {
 
 //     member.guild.channels.cache.get(data.ChannelID).send({ embeds: [embed]})
 // }
-
-
-// client.on("guildMemberAdd", member => {
-//     // To compare, we need to load the current invite list.
-//     member.guild.invites.fetch().then(newInvites => {
-//       // This is the *existing* invites for the guild.
-//       const oldInvites = invites.get(member.guild.id);
-//       // Look through the invites, find the one for which the uses went up.
-//       const invite = newInvites.find(i => i.uses > oldInvites.get(i.code));
-//       // This is just to simplify the message being sent below (inviter doesn't have a tag property)
-//       const inviter = client.users.cache.get(invite.inviter.id);
-//       // Get the log channel (change to your liking)
-//       const logChannel = member.guild.channels.cache.find(channel => channel.name === "join-logs");
-//       // A real basic message with the information we need. 
-//       inviter
-//         ? logChannel.send(`${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`)
-//         : logChannel.send(`${member.user.tag} joined but I couldn't find through which invite.`);
-//     });
-//   });
