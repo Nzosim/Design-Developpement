@@ -2,7 +2,7 @@ const fs = require('fs');
 const { Client, Collection, Intents, MessageEmbed, Message } = require('discord.js');
 const config = require('./config.json');
 const AntiSpam = require("discord-anti-spam");
-const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS", "GUILD_PRESENCES"] });
+const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"] }); // GUILD_PRESENCES pour le status soutien
 client.commands = new Collection();
 client.login(config.token);
 
@@ -10,9 +10,7 @@ client.login(config.token);
 const commandFolders = fs.readdirSync("./commands");
 
 for (const folder of commandFolders) {
-	const commandFiles = fs
-	  .readdirSync(`./commands/${folder}`)
-	  .filter((file) => file.endsWith(".js"));
+	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter((file) => file.endsWith(".js"));
 	for (const file of commandFiles) {
 		const command = require(`./commands/${folder}/${file}`);
 		client.commands.set(command.data.name, command);
@@ -20,7 +18,6 @@ for (const folder of commandFolders) {
 }
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
 	if (event.once) {
@@ -78,8 +75,3 @@ const antiSpam = new AntiSpam({
 	modLogsMode: "embed",
   })
   client.on("messageCreate", (message) => antiSpam.message(message));
-
-
-
-
-  

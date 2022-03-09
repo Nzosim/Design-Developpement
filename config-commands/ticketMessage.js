@@ -24,7 +24,7 @@
 
 
 module.exports = {
-    name: 'ticketMessage',
+    name: 'ticket-Message',
     execute(message) {
         console.log("OK")
     },
