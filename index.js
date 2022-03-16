@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { Client, Collection, Intents, MessageEmbed, Message } = require('discord.js');
+const InvitesTracker = require('@androz2091/discord-invites-tracker');
 const config = require('./config.json');
 const AntiSpam = require("discord-anti-spam");
 const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"] }); // GUILD_PRESENCES pour le status soutien
@@ -57,3 +58,29 @@ client.on('interactionCreate', async interaction => {
 	
 // })
 
+
+
+
+// const tracker = InvitesTracker.init(client, {
+//     fetchGuilds: true,
+//     fetchVanity: true,
+//     fetchAuditLogs: true
+// });
+
+// tracker.on('guildMemberAdd', (member, type, invite) => {
+
+//     const welcomeChannel = member.guild.channels.cache.get(config.joinAndLeave);
+
+//     if(type === 'normal'){
+//         welcomeChannel.send(`Welcome ${member}! You were invited by ${invite.inviter.username}!`);
+//     }
+
+//     else if(type === 'vanity'){
+//         welcomeChannel.send(`Welcome ${member}! You joined using a custom invite!`);
+//     }
+
+//     else if(type === 'unknown'){
+//         welcomeChannel.send(`Welcome ${member}! I can't figure out how you joined the server...`);
+//     }
+
+// });

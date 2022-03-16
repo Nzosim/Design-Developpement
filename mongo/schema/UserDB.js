@@ -18,6 +18,11 @@ const UserDB = new mongoose.Schema({
         min: 0,
         default: 0
     },
+    invite: {
+        type: Number,
+        min: 0,
+        default: 0
+    },
     daily: Date,
     roulette: Date
 })

@@ -19,7 +19,7 @@ module.exports = {
         /*
         * Changement du channel : nombre de membre
         */
-        return member.guild.channels.cache.get(config.memberCount).edit({ name: `Membre : ${member.guild.memberCount}` })
+        return member.guild.channels.cache.get(config.memberCount).edit({ name: `📈 Membre : ${member.guild.memberCount}` })
 
 	},
 };

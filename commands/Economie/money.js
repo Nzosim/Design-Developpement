@@ -14,8 +14,7 @@ module.exports = {
 
         if (user == null) user = interaction.user
 
-        let userCreer = await db.exist(user.id)
-        if(userCreer) interaction.guild.channels.cache.get(config.log.logmongo).send(`Utilisateur ajouté à la base de données : ${user.tag}`)
+        db.exist(user.id, user.username)
 
         const money = await dbMoney.seeMoney(user.id)
         interaction.guild.channels.cache.get(config.log.logmongo).send(`${user.tag} à actuellement : **${money} D&D**.`)

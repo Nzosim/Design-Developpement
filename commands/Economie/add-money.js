@@ -21,8 +21,7 @@ module.exports = {
 			return interaction.reply({ content: 'Vous devez entrer un nombre valide !', ephemeral: true });
 		}
 
-        let userCreer = await db.exist(user.id)
-        if(userCreer) interaction.guild.channels.cache.get(config.log.logmongo).send(`Utilisateur ajouté à la base de données : ${message.author.tag}`)
+        db.exist(user.id, user.username)
 
         const moneyNow = await dbMoney.addMoney(user.id, number)
         interaction.guild.channels.cache.get(config.log.logmongo).send(`**${number} D&D** ont été ajouté à ${user.tag}, il est maintenant à **${moneyNow} D&D**.`)
@@ -31,4 +30,9 @@ module.exports = {
         return interaction.reply({ content: `**${number}** D&D ont été ajouté à ${user.tag}, il est maintenant à **${moneyNow} D&D**.`});
 
     }
+    
 }
+
+
+
+
