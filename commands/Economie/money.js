@@ -20,6 +20,7 @@ module.exports = {
         const money = await dbMoney.seeMoney(user.id)
         interaction.guild.channels.cache.get(config.log.logmongo).send(`${user.tag} à actuellement : **${money} D&D**.`)
 
+        
         return interaction.reply({ content: `Vous avez actuellement : **${money} D&D**.`});
 
     }
