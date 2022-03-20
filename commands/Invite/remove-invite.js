@@ -6,7 +6,7 @@ const config = require('../../config.json')
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('remove-money')
+        .setName('remove-invite')
         .setDescription('Retirer de l\'argent à un utilisateur')
         .addUserOption(option => option.setName('utilisateur').setDescription('Utilisateur concerné').setRequired(true))
         .addIntegerOption(option => option.setName('nombre').setDescription('Argent à retirer').setRequired(true)),

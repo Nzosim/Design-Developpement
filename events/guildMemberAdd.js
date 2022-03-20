@@ -19,13 +19,18 @@ module.exports = {
         /*
         * Changement du channel : nombre de membre
         */
-        return member.guild.channels.cache.get(config.memberCount).edit({ name: `📈 Membre : ${member.guild.memberCount}` })
+        member.guild.channels.cache.get(config.memberCount).edit({ name: `📈 Membre : ${member.guild.memberCount}` })
+
+        /*
+        * Auto rôle, ajoute le rôle membre au nouveau membre
+        */ 
+        member.roles.add(member.guild.roles.cache.get(config.roleNewMembre))
         
 	},
 };
 
 
-// member.guild.channels.cache.get(config.event.join).send(`${member.user} vient de nous rejoindre. Il a été invité par ${} qui a désormais ${} invitations`)
+// member.guild.channelks.cache.get(config.event.join).send(`${member.user} vient de nous rejoindre. Il a été invité par ${} qui a désormais ${} invitations`)
 
 
 
