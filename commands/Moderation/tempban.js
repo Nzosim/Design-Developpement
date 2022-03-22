@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders'),
     { MessageEmbed } = require('discord.js'),
-    Discord = require('Discord.js'),
+    Discord = require('discord.js'),
     config = require('../../config.json'),
     parseDuration = require('parse-duration'),
     humanizeDuration = require('humanize-duration')

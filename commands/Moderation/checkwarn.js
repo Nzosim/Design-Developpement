@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders'),
     { MessageEmbed } = require('discord.js'),
-    Discord = require('Discord.js'),
+    Discord = require('discord.js'),
     db = require('../../mongo/warn.js');
 
 module.exports = {

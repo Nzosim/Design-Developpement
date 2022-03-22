@@ -1,6 +1,6 @@
 const db = require('../mongo/level.js'),
         dbU = require('../mongo/user.js'),
-        { MessageEmbed } = require('discord.js'),
+        { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js'),
         config = require('../config.json'),
         AntiSpam = require("discord-anti-spam")
 
@@ -33,6 +33,86 @@ function del(){
 module.exports = {
         name: 'messageCreate',
 	async execute(message) {
+
+
+
+
+
+                const embed = new MessageEmbed()
+			.setTitle("**Kyoline**")
+                        .setColor(config.embedColor)
+			.setDescription("**__Tarifs :__**\n\nLogo -> 5€\nBannière (site, twitch, discord) -> 7€\nBouton personnalisés -> 7€\nOverlay -> 7€\nPack Twitch (bouton, overlay, bannière) -> 19€ (logo non compris)\n\n**Toutes créations possible, il suffit d'en faire la demande !**")
+                        .setImage("https://cdn.discordapp.com/attachments/955464773397544961/955528166015926352/POV-1.jpg")
+
+                        const embed3 = new MessageEmbed()
+                        .setImage("https://cdn.discordapp.com/attachments/955464773397544961/955528165416124446/banniereTJ.jpg")
+                        .setColor(config.embedColor)
+                        const embed4 = new MessageEmbed()
+                        .setImage("https://cdn.discordapp.com/attachments/955464773397544961/955528165713903616/fond_YT.jpg")
+                        .setColor(config.embedColor)
+
+
+
+                        const embed5 = new MessageEmbed()
+                        .setTitle("**Ticket Graphiste**")
+                        .setColor(config.embedColor)
+                        .setDescription('**Tarifs ci-dessus ⬆️**\nCliquez sur le bouton ci-dessous pour ouvrir un ticket')
+                        .setFooter("Bot made by Nzosim#0379")
+                      const row = new MessageActionRow()
+                        .addComponents(
+                          new MessageButton()
+                          .setCustomId('ticket-graphiste')
+                          .setLabel('Ouvrir un ticket')
+                          .setEmoji('✉️')
+                          .setStyle('PRIMARY'),
+                        );
+
+
+                // const embed = new MessageEmbed()
+                // .setTitle("**__Recrutement :__**")
+                // .setDescription("**Design & Developpement recrute :**\n\n- 1 graphistes\n- 3 créateur de serveurs discord\n- 1 développeur de plugins et mods minecraft\n- 1 développeur web\n- 1 développeur FIVEM\n\n**Si vous êtes intérressé par un des postes ci-dessus ou si vous pensez que vous pouvez être utile pour le serveur, veuillez ouvrir un __ticket__ dans le channel :**\n<#819877503837274123>\n")
+                // .setColor(config.embedColor)
+
+               
+                // Création de bot discord personnalisé 
+
+                // Langage : JavaScript
+
+                // Tarifs : Il y a deux façon de payer un bot discord 
+                //         - Via un nombre d'invitations à effectuer sur le serveur
+                //         - Via PayPal
+
+                // Mes competences :
+                // Je suis capable de faire presque nimporte quel bot avec discordJs en v12 ou v13 :
+                //         Moderation
+                //         Anti-Raid
+                //         Anti-Spam
+                //         Système de niveau
+                //         Système d'economie
+                //         Système de musique
+                //         Ticket
+                //         Message de bienvenue 
+                //         AutoRole
+                //         ...
+
+                // Je maitrise egalement les dernier ajout de la v13 comme les Boutons, Les SlashCommandes, les selectMenus,  
+
+
+
+
+                if(message.content == "reg"){
+                        message.channel.send({embeds:[embed,embed3,embed4]})
+                        message.channel.send({
+                        embeds: [embed5],
+                        components: [row]
+                      })
+                }
+
+
+
+
+
+
 
                 if(message.author.bot) return
 

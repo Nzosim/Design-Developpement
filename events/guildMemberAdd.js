@@ -29,7 +29,6 @@ module.exports = {
 	},
 };
 
-
 // member.guild.channelks.cache.get(config.event.join).send(`${member.user} vient de nous rejoindre. Il a été invité par ${} qui a désormais ${} invitations`)
 
 

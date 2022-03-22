@@ -1,6 +1,8 @@
 const config = require('../config.json'),
 	mongoose = require('mongoose');
 
+const { MessageEmbed } = require('discord.js')
+
 module.exports = {
 	name: 'ready',
 	once: true,
@@ -18,6 +20,6 @@ module.exports = {
 		await mongoose.connect('mongodb+srv://DesignDeveloppement:86t5mnhVQDaTfqzV@designdeveloppement.di8ct.mongodb.net/DesignDeveloppement?retryWrites=true&w=majority', {
 			keepAlive: true
 		}).then(console.log('MongoDB connected'))
-	
+
 	}
 }
