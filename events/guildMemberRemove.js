@@ -14,7 +14,7 @@ module.exports = {
         /*
         * Message lorsqu'un membre quitte le serveur
         */
-        member.guild.channels.cache.get(config.joinAndLeave).send(`${member.user.tag} a quitté`);
+        // member.guild.channels.cache.get(config.joinAndLeave).send(`${member.user.tag} a quitté`);
 
         /*
         * Changement du channel : nombre de membre
