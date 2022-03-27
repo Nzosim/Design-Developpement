@@ -34,7 +34,7 @@ async function exist(id, name){
 * @param id identifiant du membre
 */
 async function remove(id){
-	await UserDB.deleteOne({
+	await UserDB.deleteMany({
 		userId: id
 	})
 }

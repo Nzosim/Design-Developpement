@@ -2,11 +2,12 @@ const fs = require('fs');
 const { Client, Collection, Intents, MessageEmbed, Message } = require('discord.js');
 const InvitesTracker = require('@androz2091/discord-invites-tracker');
 const config = require('./config.json');
-const AntiSpam = require("discord-anti-spam");
+const AntiSpam = require("discord-anti-spam"),
+{ promisify } = require('util'),
+wait = promisify(setTimeout)
 const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"] }); // GUILD_PRESENCES pour le status soutien
 client.commands = new Collection();
 client.login(config.token);
-
 
 const commandFolders = fs.readdirSync("./commands");
 
@@ -43,44 +44,32 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
+const dbInvite = require('./mongo/invite.js')
+
+const tracker = InvitesTracker.init(client, {
+    fetchGuilds: true,
+    fetchVanity: true,
+    fetchAuditLogs: true
+});
+
+tracker.on('guildMemberAdd', async (member, type, invite) => {
+
+    const welcomeChannel = member.guild.channels.cache.get(config.joinAndLeave);
+
+	const invitationApresAjout = await dbInvite.addInvite(invite.inviter.id, 1)
+
+	await dbInvite.addInviter(invite.inviter.id, member.id)
+
+	const messageJoin = `**${member.user.username}** est le membre numéro **${member.guild.memberCount} !**`
+
+    if(type === 'normal'){
+        welcomeChannel.send(`${member} vient de rejoindre.\nIl a été invité par **${invite.inviter.username}**`
+			+` qui a désormais ${invitationApresAjout} invitations\n${messageJoin}`);
+    }else if(type === 'vanity'){
+        welcomeChannel.send(`${member} vient de rejoindre depuis l'URL du serveur.`);
+    }else if(type === 'unknown'){
+        welcomeChannel.send(`${member} vient de rejoindre. Je ne peux pas déterminer qui l'a invité.\n${messageJoin}`);
+    }
+});
 
 
-// client.on('messageCreate', message => {
-
-//     if (message.author.bot) return
-//     const args = message.content.trim().split(/ +/g)
-//     const commandName = args.shift().toLowerCase()
-//     if (!commandName.startsWith(config.prefix)) return
-//     const command = client.commands.get(commandName.slice(config.prefix.length))
-//     if (!command) return
-// 	console.log("qsefg")
-//     command.execute(message)
-	
-// })
-
-
-
-
-// const tracker = InvitesTracker.init(client, {
-//     fetchGuilds: true,
-//     fetchVanity: true,
-//     fetchAuditLogs: true
-// });
-
-// tracker.on('guildMemberAdd', (member, type, invite) => {
-
-//     const welcomeChannel = member.guild.channels.cache.get(config.joinAndLeave);
-
-//     if(type === 'normal'){
-//         welcomeChannel.send(`Welcome ${member}! You were invited by ${invite.inviter.username}!`);
-//     }
-
-//     else if(type === 'vanity'){
-//         welcomeChannel.send(`Welcome ${member}! You joined using a custom invite!`);
-//     }
-
-//     else if(type === 'unknown'){
-//         welcomeChannel.send(`Welcome ${member}! I can't figure out how you joined the server...`);
-//     }
-
-// });

@@ -25,32 +25,41 @@ async function addInvite(id, number){
 */
 async function removeInvite(id, number){
     const result = await UserDB.findOneAndUpdate({
-            userId: id
-        },{
-			$inc: {
-				invite: -number
-			}
-        })
-	// if(invit.money - number < 0){
-	// 	await UserDB.findOneAndUpdate({
-    //         userId: id
-    //     },{
-	// 		money: 0
-    //     })
-	// }
-	return result.invite - number > 0 ? result.invite - number : 0 
+        userId: id
+    },{
+        $inc: {
+            invite: -number
+        }
+    })
+	// return result[0].invite - number
 }
 
 /*
 * Permet de voir les invitations d'un utilisateur
 * @param id identifiant du membre
 * @return invitations de l'utilisateur
-*/
+*/ 
 async function seeInvite(id){
 	const result = await UserDB.find({
 		userId: id
 	})
-	return result[0].invite
+	return result[0]
 } 
 
-module.exports = { addInvite, removeInvite, seeInvite };
+async function addInviter(inviteID, memberID){
+    const result = await UserDB.findOneAndUpdate({
+        userId: memberID
+    },{
+        inviter: inviteID
+    })
+}
+
+async function seeInviter(id){
+	const result = await UserDB.find({
+		userId: id
+	})
+    // console.log()
+    return result[0].inviter
+} 
+
+module.exports = { addInvite, removeInvite, seeInvite, addInviter, seeInviter };

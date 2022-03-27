@@ -31,7 +31,7 @@ async function addXp(memberId, xpToAdd, message){
     if (xp >= needed) {
         level++
         xp -= needed
-        // if(!message.channel.name.startWith("ticket")) message.reply(`**Félicitation !**\nVous venez de passer au level **${level}** !`)
+        if(!message.channel.name.includes("ticket")) message.reply(`**Félicitation !**\nVous venez de passer au level **${level}** !`)
     }
 
     await UserDB.updateOne({
