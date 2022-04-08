@@ -9,9 +9,9 @@ module.exports = {
         /*
         * Message lorsqu'un membre quitte le serveur
         */
-        const inviter = await dbInvite.seeInviter(member.id)
-        member.guild.channels.cache.get(config.joinAndLeave).send(`**${member.user.username}** est parti.`)
-        dbInvite.removeInvite(inviter, 1)
+        // const inviter = await dbInvite.seeInviter(member.id)
+        // member.guild.channels.cache.get(config.joinAndLeave).send(`**${member.user.username}** est parti.`)
+        // dbInvite.removeInvite(inviter, 1)
 
         /*
         * Permet de retirer de la base de donnée les utilisateurs qui quitte le serveur (ne retire pas les warns de la personne)

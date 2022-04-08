@@ -47,6 +47,7 @@ module.exports = {
                 */
                 for(let i = 0 ; i < config.antiLien.length ; i++){
                         if(message.content.includes(config.antiLien[i]) && message.author.id != message.guild.ownerId){
+                                if(message.channel.name.includes("ticket-")) return
                                 delBot = true
                                 message.channel.send('Les liens sont interdit !')
                                 message.guild.channels.cache.get(config.log.logevents).send({embeds: [new MessageEmbed()

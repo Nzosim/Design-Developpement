@@ -52,24 +52,25 @@ const tracker = InvitesTracker.init(client, {
     fetchAuditLogs: true
 });
 
-tracker.on('guildMemberAdd', async (member, type, invite) => {
+// tracker.on('guildMemberAdd', async (member, type, invite) => {
 
-    const welcomeChannel = member.guild.channels.cache.get(config.joinAndLeave);
+//     const welcomeChannel = member.guild.channels.cache.get(config.joinAndLeave);
 
-	const invitationApresAjout = await dbInvite.addInvite(invite.inviter.id, 1)
+// 	const invitationApresAjout = await dbInvite.addInvite(invite.inviter.id, 1)
 
-	await dbInvite.addInviter(invite.inviter.id, member.id)
+// 	await dbInvite.addInviter(invite.inviter.id, member.id)
 
-	const messageJoin = `**${member.user.username}** est le membre numéro **${member.guild.memberCount} !**`
+// 	const messageJoin = `**${member.user.username}** est le membre numéro **${member.guild.memberCount} !**`
 
-    if(type === 'normal'){
-        welcomeChannel.send(`${member} vient de rejoindre.\nIl a été invité par **${invite.inviter.username}**`
-			+` qui a désormais ${invitationApresAjout} invitations\n${messageJoin}`);
-    }else if(type === 'vanity'){
-        welcomeChannel.send(`${member} vient de rejoindre depuis l'URL du serveur.`);
-    }else if(type === 'unknown'){
-        welcomeChannel.send(`${member} vient de rejoindre. Je ne peux pas déterminer qui l'a invité.\n${messageJoin}`);
-    }
-});
-
+//     if(type === 'normal'){
+//         welcomeChannel.send(`${member} vient de rejoindre.\nIl a été invité par **${invite.inviter.username}**`
+// 			+` qui a désormais ${invitationApresAjout} invitations\n${messageJoin}`);
+//     }else if(type === 'vanity'){
+//         welcomeChannel.send(`${member} vient de rejoindre depuis l'URL du serveur.`);
+//     }else if(type === 'unknown'){
+//         welcomeChannel.send(`${member} vient de rejoindre. Je ne peux pas déterminer qui l'a invité.\n${messageJoin}`);
+//     }else{
+// 		welcomeChannel.send(`${member} vient de rejoindre.\nIl a été invité par **DISBOARD**`);
+// 	}
+// });
 
