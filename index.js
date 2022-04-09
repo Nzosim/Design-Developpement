@@ -165,7 +165,7 @@ client.on('interactionCreate', (interaction) => {
 			.setCustomId('detail')
 			.setLabel('Veuillez lister les fonctionnalités voulues')
 			.setStyle('LONG') 
-			.setPlaceholder('Paypal, invitations')
+			.setPlaceholder('Modération (warn, ban, ...), Anti-Raid, ...')
 			.setRequired(true) 
 		)
 		.addComponents(
@@ -182,5 +182,109 @@ client.on('interactionCreate', (interaction) => {
 		})
 
 	}
+
+	if (interaction.customId == "web"){
+	
+		const modal = new Modal() 
+		.setCustomId('web')
+		.setTitle('Commande de site web :')
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('budget')
+			.setLabel('Veuillez indiquer votre budget.')
+			.setStyle('SHORT') 
+			.setRequired(true) 
+		)
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('detail')
+			.setLabel('Décrivez votre demande précisément')
+			.setStyle('LONG') 
+			.setRequired(true) 
+		)
+
+		showModal(modal, {
+			client: client, 
+			interaction: interaction 
+		})
+
+	}
+
+	if (interaction.customId == "kyoline"){
+	
+		const modal = new Modal() 
+		.setCustomId('kyoline')
+		.setTitle('Commande graphisme :')
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('type')
+			.setLabel('Que voulez vous commander ?')
+			.setStyle('SHORT') 
+			.setPlaceholder('Logo, Bannière, Overlay, ...')
+			.setRequired(true) 
+		)
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('detail')
+			.setLabel('Décrivez votre demande précisément')
+			.setStyle('LONG') 
+			.setRequired(true) 
+		)
+
+		showModal(modal, {
+			client: client, 
+			interaction: interaction 
+		})
+
+	}
+
+	if (interaction.customId == "soon"){
+	
+		const modal = new Modal() 
+		.setCustomId('soon')
+		.setTitle('Commande graphisme :')
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('type')
+			.setLabel('Que voulez vous commander ?')
+			.setStyle('SHORT') 
+			.setPlaceholder('Logo, Bannière, Overlay, ...')
+			.setRequired(true) 
+		)
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('detail')
+			.setLabel('Décrivez votre demande précisément')
+			.setStyle('LONG') 
+			.setRequired(true) 
+		)
+
+		showModal(modal, {
+			client: client, 
+			interaction: interaction 
+		})
+
+	}
+
+	if (interaction.customId == "serveur"){
+	
+		const modal = new Modal() 
+		.setCustomId('serveur')
+		.setTitle('Commande serveur discord :')
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('detail')
+			.setLabel('Décrivez votre demande précisément')
+			.setStyle('LONG') 
+			.setRequired(true) 
+		)
+
+		showModal(modal, {
+			client: client, 
+			interaction: interaction 
+		})
+
+	}
+
 })
 

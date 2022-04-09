@@ -144,6 +144,184 @@ module.exports = {
             })
         }
 
+        /*
+        * Ticket web
+        */
+        if(modal.customId === 'web'){
+            const firstResponse = modal.getTextInputValue('budget')
+            const second = modal.getTextInputValue('detail')
+
+            modal.guild.channels.create(`ticket-${modal.member.user.username}`, {
+                parent: config.ticket.categorieTicket,
+                topic: modal.member.user.id,
+                permissionOverwrites: [{
+                    id: modal.member.user.id,
+                    allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
+                },
+                {
+                    id: modal.guild.roles.everyone,
+                    deny: ['VIEW_CHANNEL'],
+                },
+                ],
+                type: 'text',
+            }).then(async c => {
+                await modal.deferReply({ ephemeral: true })
+                modal.followUp({content: `Voici votre ticket : <#${c.id}>`})
+                const embed = new MessageEmbed()
+                    .setTitle("Ticket web de : "+ modal.member.user.username)
+                    .addField("Budget", firstResponse)
+                    .addField("Detail", second)
+                    .setColor(config.embedColor)
+
+                const row = new MessageActionRow()
+                    .addComponents(new MessageButton()
+                        .setCustomId('close-ticket')
+                        .setLabel('Fermer le ticket')
+                        .setStyle('DANGER'),
+                    )
+
+                await c.send({
+                    embeds: [embed],
+                    components: [row]
+                })
+
+                modal.guild.channels.cache.get(config.log.logevents).send(`${modal.member.user.username} a ouvert un ticket : <#${c.id}>`)
+            })
+        }
+
+        /*
+        * Ticket kyoline
+        */
+        if(modal.customId === 'kyoline'){
+            const firstResponse = modal.getTextInputValue('type')
+            const second = modal.getTextInputValue('detail')
+
+            modal.guild.channels.create(`ticket-${modal.member.user.username}`, {
+                parent: config.ticket.categorieTicket,
+                topic: modal.member.user.id,
+                permissionOverwrites: [{
+                    id: modal.member.user.id,
+                    allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
+                },
+                {
+                    id: modal.guild.roles.everyone,
+                    deny: ['VIEW_CHANNEL'],
+                },
+                ],
+                type: 'text',
+            }).then(async c => {
+                await modal.deferReply({ ephemeral: true })
+                modal.followUp({content: `Voici votre ticket : <#${c.id}>`})
+                const embed = new MessageEmbed()
+                    .setTitle("Ticket Kyoline graphisme de : "+ modal.member.user.username)
+                    .addField("Type", firstResponse)
+                    .addField("Detail", second)
+                    .setColor(config.embedColor)
+
+                const row = new MessageActionRow()
+                    .addComponents(new MessageButton()
+                        .setCustomId('close-ticket')
+                        .setLabel('Fermer le ticket')
+                        .setStyle('DANGER'),
+                    )
+
+                await c.send({
+                    embeds: [embed],
+                    components: [row]
+                })
+
+                modal.guild.channels.cache.get(config.log.logevents).send(`${modal.member.user.username} a ouvert un ticket : <#${c.id}>`)
+            })
+        }
+
+        /*
+        * Ticket soon
+        */
+        if(modal.customId === 'soon'){
+            const firstResponse = modal.getTextInputValue('type')
+            const second = modal.getTextInputValue('detail')
+
+            modal.guild.channels.create(`ticket-${modal.member.user.username}`, {
+                parent: config.ticket.categorieTicket,
+                topic: modal.member.user.id,
+                permissionOverwrites: [{
+                    id: modal.member.user.id,
+                    allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
+                },
+                {
+                    id: modal.guild.roles.everyone,
+                    deny: ['VIEW_CHANNEL'],
+                },
+                ],
+                type: 'text',
+            }).then(async c => {
+                await modal.deferReply({ ephemeral: true })
+                modal.followUp({content: `Voici votre ticket : <#${c.id}>`})
+                const embed = new MessageEmbed()
+                    .setTitle("Ticket Soon art de : "+ modal.member.user.username)
+                    .addField("Type", firstResponse)
+                    .addField("Detail", second)
+                    .setColor(config.embedColor)
+
+                const row = new MessageActionRow()
+                    .addComponents(new MessageButton()
+                        .setCustomId('close-ticket')
+                        .setLabel('Fermer le ticket')
+                        .setStyle('DANGER'),
+                    )
+
+                await c.send({
+                    embeds: [embed],
+                    components: [row]
+                })
+
+                modal.guild.channels.cache.get(config.log.logevents).send(`${modal.member.user.username} a ouvert un ticket : <#${c.id}>`)
+            })
+        }
+
+        /*
+        * Ticket serveur
+        */
+        if(modal.customId === 'serveur'){
+            const firstResponse = modal.getTextInputValue('detail')
+
+            modal.guild.channels.create(`ticket-${modal.member.user.username}`, {
+                parent: config.ticket.categorieTicket,
+                topic: modal.member.user.id,
+                permissionOverwrites: [{
+                    id: modal.member.user.id,
+                    allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
+                },
+                {
+                    id: modal.guild.roles.everyone,
+                    deny: ['VIEW_CHANNEL'],
+                },
+                ],
+                type: 'text',
+            }).then(async c => {
+                await modal.deferReply({ ephemeral: true })
+                modal.followUp({content: `Voici votre ticket : <#${c.id}>`})
+                const embed = new MessageEmbed()
+                    .setTitle("Ticket création serveur de : "+ modal.member.user.username)
+                    .addField("Detail", firstResponse)
+                    .setColor(config.embedColor)
+
+                const row = new MessageActionRow()
+                    .addComponents(new MessageButton()
+                        .setCustomId('close-ticket')
+                        .setLabel('Fermer le ticket')
+                        .setStyle('DANGER'),
+                    )
+
+                await c.send({
+                    embeds: [embed],
+                    components: [row]
+                })
+
+                modal.guild.channels.cache.get(config.log.logevents).send(`${modal.member.user.username} a ouvert un ticket : <#${c.id}>`)
+            })
+        }
+
     }   
 }
 
