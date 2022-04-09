@@ -10,7 +10,7 @@ module.exports = {
     */ 
     if (!interaction.isButton()) return;
     // ouverture de ticket
-    if (interaction.customId == "ticket-support" || interaction.customId == "ticket-bot" || interaction.customId == "ticket-serveur" || interaction.customId == "ticket-graphiste") {
+    if (interaction.customId == "ticket-bot" || interaction.customId == "ticket-serveur" || interaction.customId == "ticket-graphiste") {
         if (interaction.guild.channels.cache.find(c => c.topic == interaction.user.id)) {
             interaction.guild.channels.cache.get(config.log.logevents).send(`${interaction.user.username} a essayé d'ouvrir un deuxième ticket`)
             return interaction.reply({content: 'Vous avez déjà un ticket ouvert !',ephemeral: true});
@@ -111,7 +111,25 @@ module.exports = {
           collector.stop();
         };
       });
-    };
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
   
   }
 }

@@ -8,6 +8,8 @@ wait = promisify(setTimeout)
 const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"] }); // GUILD_PRESENCES pour le status soutien
 client.commands = new Collection();
 client.login(config.token);
+const discordModals = require('discord-modals') // Define the discord-modals package!
+discordModals(client);
 
 const commandFolders = fs.readdirSync("./commands");
 
@@ -73,4 +75,112 @@ const tracker = InvitesTracker.init(client, {
 // 		welcomeChannel.send(`${member} vient de rejoindre.\nIl a été invité par **DISBOARD**`);
 // 	}
 // });
+
+
+
+const { Modal, TextInputComponent, showModal } = require('discord-modals')
+
+client.on('interactionCreate', (interaction) => {
+	if (interaction.customId == "recrutement"){
+	
+		const modal = new Modal() 
+		.setCustomId('recrutement')
+		.setTitle('Recrutement :')
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('age')
+			.setLabel('Quelle est votre âge ?')
+			.setStyle('SHORT') 
+			.setPlaceholder('Votre âge ici')
+			.setRequired(true) 
+		)
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('poste')
+			.setLabel('A quelle poste voulez vous postuler ?')
+			.setStyle('SHORT') 
+			.setPlaceholder('Developpeur, Graphiste, etc...')
+			.setRequired(true) 
+		)
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('experience')
+			.setLabel('Depuis quand êtes vous dans se domaine ?')
+			.setStyle('SHORT') 
+			.setPlaceholder('1 ans, 2 ans, etc...')
+			.setRequired(true) 
+		)
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('time')
+			.setLabel('Quels sont vos disponibilités ?')
+			.setStyle('SHORT') 
+			.setPlaceholder('tout les jous, week end, seulement pendant les vacances...')
+			.setRequired(true) 
+		)
+
+		showModal(modal, {
+			client: client, 
+			interaction: interaction 
+		})
+
+	}
+
+	if (interaction.customId == "support"){
+	
+		const modal = new Modal() 
+		.setCustomId('support')
+		.setTitle('Ticket Support :')
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('prb')
+			.setLabel('Quelle est votre problème ?')
+			.setStyle('LONG') 
+			// .setPlaceholder('Votre âge ici')
+			.setRequired(true) 
+		)
+
+		showModal(modal, {
+			client: client, 
+			interaction: interaction 
+		})
+
+	}
+
+	if (interaction.customId == "bot"){
+	
+		const modal = new Modal() 
+		.setCustomId('bot')
+		.setTitle('Commande de bot discord :')
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('paie')
+			.setLabel('Voulez-vous payer via PayPal ou invitations ?')
+			.setStyle('SHORT') 
+			.setPlaceholder('Paypal, invitations')
+			.setRequired(true) 
+		)
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('detail')
+			.setLabel('Veuillez lister les fonctionnalités voulues')
+			.setStyle('LONG') 
+			.setPlaceholder('Paypal, invitations')
+			.setRequired(true) 
+		)
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('temps')
+			.setLabel('Pour quand le voulez-vous ?')
+			.setStyle('SHORT') 
+			.setRequired(true) 
+		)
+
+		showModal(modal, {
+			client: client, 
+			interaction: interaction 
+		})
+
+	}
+})
 

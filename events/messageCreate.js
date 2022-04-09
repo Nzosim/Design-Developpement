@@ -110,5 +110,82 @@ module.exports = {
                         message.delete();
                 }
 
+                /*
+                * Creation message et ticket recrutement
+                */
+                if(message.content === `${config.prefix}recrutement-create`){
+                        if(message.author.id != message.guild.ownerId) return message.reply("Vous n'avez pas la permission pour effectuer cette commande !")
+                        const embed = new MessageEmbed()
+                                .setTitle("**__Recrutement :__**")
+                                .setColor(config.embedColor)
+                                .setDescription("**Design & Developpement recrute :**\n\n- 1 graphistes\n- 1 développeur de plugins et mods minecraft\n- 1 développeur web\n"
+                                        +"- 1 développeur FIVEM\n- 1 monteur\n\n**Si vous êtes intéressé par un des postes ci-dessus ou si vous pensez que vous pouvez être utile pour le serveur, "
+                                        +"veuillez ouvrir un ticket en cliquant sur le bouton ci-dessous**")
+                        const row = new MessageActionRow()
+                                .addComponents(new MessageButton()
+                                        .setCustomId('recrutement')
+                                        .setLabel('POSTULER')
+                                        .setEmoji('✉️')
+                                        .setStyle('PRIMARY'),
+                                )
+
+                        message.channel.send({
+                                embeds: [embed],
+                                components: [row]
+                        })
+                        message.delete()
+                }
+
+                /*
+                * Creation message et ticket support
+                */
+                if(message.content === `${config.prefix}support-create`){
+                        if(message.author.id != message.guild.ownerId) return message.reply("Vous n'avez pas la permission pour effectuer cette commande !")
+                        const embed = new MessageEmbed()
+                                .setTitle("**Ticket Support**")
+                                .setColor(config.embedColor)
+                                .setDescription("Cliquez sur le bouton ci-dessous pour ouvrir un ticket\nLes abus seront sanctionnés")
+                        const row = new MessageActionRow()
+                                .addComponents(new MessageButton()
+                                        .setCustomId('support')
+                                        .setLabel('Ouvrir un ticket')
+                                        .setEmoji('✉️')
+                                        .setStyle('PRIMARY'),
+                                )
+
+                        message.channel.send({
+                                embeds: [embed],
+                                components: [row]
+                        })
+                        message.delete()
+                }
+
+                /*
+                * Creation message et ticket commande bot discord
+                */
+                if(message.content === `${config.prefix}bot-create`){
+                        if(message.author.id != message.guild.ownerId) return message.reply("Vous n'avez pas la permission pour effectuer cette commande !")
+                        const embed = new MessageEmbed()
+                                .setTitle("**Création de bot discord personnalisé**")
+                                .setColor(config.embedColor)
+                                .setDescription("**Langage :** JavaScript\n\n**Tarifs :**\nIl y a deux façon de payer un bot discord :\n- Via un nombre d'invitations à effectuer sur le serveur\n- Via PayPal"+
+                                        "\n\n**Mes competences :**\nJe suis capable de faire presque n'importe quel bot avec discordjs en v12 ou v13 :\n- Moderation\n- Anti-Raid\n- Anti-Spam\n- Système de niveau\n"+
+                                        "- Système d'economie\n- Système de musique\n- Ticket\n- Message de bienvenue\n- AutoRole\n- ...\n\nJe maitrise également les derniers ajouts de la v13 comme les Boutons,"+
+                                        " les SlashCommandes, les selectMenus, les formulaires, ...\n\n**Je ne m'occupe pas de l'hébergement des bots discord**")
+                        const row = new MessageActionRow()
+                                .addComponents(new MessageButton()
+                                        .setCustomId('bot')
+                                        .setLabel('Ouvrir un ticket')
+                                        .setEmoji('✉️')
+                                        .setStyle('PRIMARY'),
+                                )
+
+                        message.channel.send({
+                                embeds: [embed],
+                                components: [row]
+                        })
+                        message.delete()
+                }
+
 	}, del
 }
