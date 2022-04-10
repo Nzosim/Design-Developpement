@@ -148,8 +148,8 @@ module.exports = {
         * Ticket web
         */
         if(modal.customId === 'web'){
-            const firstResponse = modal.getTextInputValue('budget')
-            const second = modal.getTextInputValue('detail')
+            const firstResponse = modal.getTextInputValue('detail')
+            const second = modal.getTextInputValue('budget')
 
             modal.guild.channels.create(`ticket-${modal.member.user.username}`, {
                 parent: config.ticket.categorieTicket,
@@ -169,8 +169,8 @@ module.exports = {
                 modal.followUp({content: `Voici votre ticket : <#${c.id}>`})
                 const embed = new MessageEmbed()
                     .setTitle("Ticket web de : "+ modal.member.user.username)
-                    .addField("Budget", firstResponse)
-                    .addField("Detail", second)
+                    .addField("Detail", firstResponse)
+                    .addField("Budget", second)
                     .setColor(config.embedColor)
 
                 const row = new MessageActionRow()

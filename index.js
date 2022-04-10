@@ -190,18 +190,19 @@ client.on('interactionCreate', (interaction) => {
 		.setTitle('Commande de site web :')
 		.addComponents(
 			new TextInputComponent()
-			.setCustomId('budget')
-			.setLabel('Veuillez indiquer votre budget.')
-			.setStyle('SHORT') 
-			.setRequired(true) 
-		)
-		.addComponents(
-			new TextInputComponent()
 			.setCustomId('detail')
 			.setLabel('Décrivez votre demande précisément')
 			.setStyle('LONG') 
 			.setRequired(true) 
 		)
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('budget')
+			.setLabel('Veuillez indiquer votre budget')
+			.setStyle('SHORT') 
+			.setRequired(true) 
+		)
+		
 
 		showModal(modal, {
 			client: client, 
