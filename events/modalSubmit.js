@@ -279,7 +279,6 @@ module.exports = {
                 modal.guild.channels.cache.get(config.log.logevents).send(`${modal.member.user.username} a ouvert un ticket : <#${c.id}>`)
             })
         }
-
         
         /*
         * Ticket serveur
@@ -326,11 +325,3 @@ module.exports = {
 
     }   
 }
-
-
-
-
-
-
-
-
