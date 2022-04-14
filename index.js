@@ -134,7 +134,7 @@ client.on('interactionCreate', (interaction) => {
 		.addComponents(
 			new TextInputComponent()
 			.setCustomId('prb')
-			.setLabel('Quelle est votre problème ?')
+			.setLabel('Que puis-je faire pour vous ?')
 			.setStyle('LONG') 
 			// .setPlaceholder('Votre âge ici')
 			.setRequired(true) 

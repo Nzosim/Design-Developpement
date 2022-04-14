@@ -76,7 +76,7 @@ module.exports = {
                 modal.followUp({content: `Voici votre ticket : <#${c.id}>`})
                 const embed = new MessageEmbed()
                     .setTitle("Candidature de : "+ modal.member.user.username)
-                    .addField("Problème", firstResponse, true)
+                    .addField("Besoin", firstResponse, true)
 
                 const row = new MessageActionRow()
                     .addComponents(new MessageButton()

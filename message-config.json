@@ -11,15 +11,19 @@
         "serveurTitle":"**Beldium**",
         "serveurDescription":"**__Tarifs :__**\n\nServeur discord sans configuration -> Gratuit\nServeur discord avec configuration + configuration de bot -> 3€"
     },
-    "graphiste":{
-        "soon":{
-            "soonTitle":"**Soon art**",
-            "soonDescription":"**__Tarifs :__**\n\nLogo -> 1€\nBannière de profil -> 3€\nBannière serveur discord -> 4€\nEmojis discord -> 1€\n\n**__Prochainement :__**\nPanels twitch -> 7€ le tout"
-        },
-        "kyoline":{
-            "kyolineTitle":"**Kyoline graphisme**",
-            "kyolineDescription":"**__Tarifs :__**\n\nLogo -> 5€\nBannière (site, twitch, discord) -> 7€\nBouton personnalisés -> 7€\nOverlay -> 7€\nPack Twitch (bouton, overlay, bannière) -> 19€ (logo non compris)\n\n**Toutes créations possible, il suffit d'en faire la demande !**"
-        }
+    "soon":{
+        "soonTitle":"**Soon art**",
+        "soonDescription":"**__Tarifs :__**\n\nLogo -> 1€\nBannière de profil -> 3€\nBannière serveur discord -> 4€\nEmojis discord -> 1€\n\n**__Prochainement :__**\nPanels twitch -> 7€ le tout",
+        "image1": "https://cdn.discordapp.com/attachments/688806403539992660/955198400360497153/Antivol3.png",
+        "image2": "https://cdn.discordapp.com/attachments/688806403539992660/955198314092036096/Antivol.jpg",
+        "image3": "https://cdn.discordapp.com/attachments/688806403539992660/955198448976674856/Antivol2.jpg"
+    },
+    "kyoline":{
+        "kyolineTitle":"**Kyoline graphisme**",
+        "kyolineDescription":"**__Tarifs :__**\n\nLogo -> 5€\nBannière (site, twitch, discord) -> 7€\nBouton personnalisés -> 7€\nOverlay -> 7€\nPack Twitch (bouton, overlay, bannière) -> 19€ (logo non compris)\n\n**Toutes créations possible, il suffit d'en faire la demande !**",
+        "image1": "https://cdn.discordapp.com/attachments/955464773397544961/955528165713903616/fond_YT.jpg",
+        "image2": "https://cdn.discordapp.com/attachments/955464773397544961/955528165416124446/banniereTJ.jpg",
+        "image3": "https://cdn.discordapp.com/attachments/955464773397544961/955528166015926352/POV-1.jpg"
     },
     "support":{
         "supportTitle":"**Ticket Support**",

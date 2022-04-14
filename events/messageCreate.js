@@ -70,7 +70,7 @@ module.exports = {
                         delBot = true
                         const mess = message.content
                         const author = message.author
-
+                        
                         const embed = new MessageEmbed()
                                 .setColor(config.embedColor)
                                 .setAuthor(
@@ -93,56 +93,71 @@ module.exports = {
                 antiSpam.message(message)
 
                 /*
-                * Explication système recrutement serveur
-                */ 
-                if(message.content === `${config.prefix}recrutement`){
-                        if(message.author.id != message.guild.ownerId) return message.reply("Vous n'avez pas la permission pour effectuer cette commande !")
-                        delBot = true;
-                        const embed = new MessageEmbed()
-                                .setTitle(messageConfig.recrutementInfo.recrutementInfoTitle)
-                                .setColor(config.embedColor)
-                                .setDescription(messageConfig.recrutementInfo.recrutementInfoDescription)
-
-                        message.channel.send({embeds: [embed]});
-                        message.delete();
+                * Création ticket 
+                */                        
+                let title, description, bouton, commande = true
+                switch(message.content){
+                        case `${config.prefix}serveur-create`:
+                                title = messageConfig.serveur.serveurTitle
+                                description = messageConfig.serveur.serveurDescription
+                                bouton = 'serveur'
+                                break
+                        case `${config.prefix}recrutement-create`:
+                                title = messageConfig.recrutement.recrutementTitle
+                                description = messageConfig.recrutement.recrutementDescription
+                                bouton = 'recrutement'
+                                break
+                        case `${config.prefix}support-create`:
+                                title = messageConfig.support.supportTitle
+                                description = messageConfig.support.supportDescription
+                                bouton = 'support'
+                                break
+                        case `${config.prefix}bot-create`:
+                                title = messageConfig.bot.botTitle
+                                description = messageConfig.bot.botDescription
+                                bouton = 'bot'
+                                break   
+                        case `${config.prefix}web-create`:
+                                title = messageConfig.web.webTitle
+                                description = messageConfig.web.webDescription
+                                bouton = 'web'
+                                break
+                        case `${config.prefix}kyoline-create`:
+                                title = messageConfig.kyoline.kyolineTitle
+                                description = messageConfig.kyoline.kyolineDescription
+                                bouton = 'kyoline'
+                                break
+                        case `${config.prefix}soon-create`:
+                                title = messageConfig.soon.soonTitle
+                                description = messageConfig.soon.soonDescription
+                                bouton = 'soon'
+                                break
+                        default:
+                                commande = false
                 }
-
-                /*
-                * Creation message et ticket recrutement
-                */
-                if(message.content === `${config.prefix}recrutement-create`){
+                if(commande){
                         if(message.author.id != message.guild.ownerId) return message.reply("Vous n'avez pas la permission pour effectuer cette commande !")
+
+                        if(message.content == `${config.prefix}soon-create` || message.content == `${config.prefix}kyoline-create`){
+                                const embed = new MessageEmbed()
+                                        .setImage(message.content == `${config.prefix}soon-create` ? messageConfig.soon.image1 : messageConfig.kyoline.image1)
+                                        .setColor(config.embedColor)
+                                const embed2 = new MessageEmbed()
+                                        .setImage(message.content == `${config.prefix}soon-create` ? messageConfig.soon.image2 : messageConfig.kyoline.image2)
+                                        .setColor(config.embedColor)
+                                const embed3 = new MessageEmbed()
+                                        .setImage(message.content == `${config.prefix}soon-create` ? messageConfig.soon.image3 : messageConfig.kyoline.image3)
+                                        .setColor(config.embedColor)
+                                message.channel.send({ embeds: [embed, embed2, embed3] })
+                        }
+
                         const embed = new MessageEmbed()
-                                .setTitle(messageConfig.recrutement.recrutementTitle)
+                                .setTitle(title)
                                 .setColor(config.embedColor)
-                                .setDescription(messageConfig.recrutement.recrutementDescription)
+                                .setDescription(description)
                         const row = new MessageActionRow()
                                 .addComponents(new MessageButton()
-                                        .setCustomId('recrutement')
-                                        .setLabel('POSTULER')
-                                        .setEmoji('✉️')
-                                        .setStyle('PRIMARY'),
-                                )
-
-                        message.channel.send({
-                                embeds: [embed],
-                                components: [row]
-                        })
-                        message.delete()
-                }
-
-                /*
-                * Creation message et ticket support
-                */
-                if(message.content === `${config.prefix}support-create`){
-                        if(message.author.id != message.guild.ownerId) return message.reply("Vous n'avez pas la permission pour effectuer cette commande !")
-                        const embed = new MessageEmbed()
-                                .setTitle(messageConfig.support.supportTitle)
-                                .setColor(config.embedColor)
-                                .setDescription(messageConfig.support.supportDescription)
-                        const row = new MessageActionRow()
-                                .addComponents(new MessageButton()
-                                        .setCustomId('support')
+                                        .setCustomId(bouton)
                                         .setLabel('Ouvrir un ticket')
                                         .setEmoji('✉️')
                                         .setStyle('PRIMARY'),
@@ -152,178 +167,41 @@ module.exports = {
                                 embeds: [embed],
                                 components: [row]
                         })
+                        delBot = true
                         message.delete()
                 }
 
                 /*
-                * Creation message et ticket commande bot discord
+                * Message d'aide du bot
                 */
-                if(message.content === `${config.prefix}bot-create`){
-                        if(message.author.id != message.guild.ownerId) return message.reply("Vous n'avez pas la permission pour effectuer cette commande !")
-                        const embed = new MessageEmbed()
-                                .setTitle(messageConfig.bot.botTitle)
-                                .setColor(config.embedColor)
-                                .setDescription(messageConfig.bot.botDescription)
-                        const row = new MessageActionRow()
-                                .addComponents(new MessageButton()
-                                        .setCustomId('bot')
-                                        .setLabel('Ouvrir un ticket')
-                                        .setEmoji('✉️')
-                                        .setStyle('PRIMARY'),
-                                )
-
-                        message.channel.send({
-                                embeds: [embed],
-                                components: [row]
-                        })
-                        message.delete()
+                let title2, description2, commande2 = true
+                switch(message.content){
+                        case `${config.prefix}recrutement`:
+                                title2 = messageConfig.recrutement.recrutementTitle
+                                description2 = messageConfig.recrutement.recrutementDescription
+                                break
+                        case `${config.prefix}soutien-create`:
+                                title2 = messageConfig.soutien.soutienTitle
+                                description2 = messageConfig.soutien.soutienDescription
+                                break
+                        case `${config.prefix}botInfo`:
+                                title2 = messageConfig.botInfo.botInfoTitle
+                                description2 = messageConfig.botInfo.botInfoDescription
+                                break
+                        default:
+                                commande2 = false
                 }
-
-                /*
-                * Creation message nous-soutenir
-                */
-                if(message.content === `${config.prefix}soutien-create`){
+                if(commande2){
                         if(message.author.id != message.guild.ownerId) return message.reply("Vous n'avez pas la permission pour effectuer cette commande !")
+
                         const embed = new MessageEmbed()
-                                .setTitle(messageConfig.soutien.soutienTitle)
+                                .setTitle(title2)
                                 .setColor(config.embedColor)
-                                .setDescription(messageConfig.soutien.soutienDescription)
-                        message.channel.send({
-                                embeds: [embed]
-                        })
+                                .setDescription(description2)
+
+                        message.channel.send({ embeds: [embed] })
+                        delBot = true
                         message.delete()
-                }
-
-                /*
-                * Creation message et ticket commande site web
-                */
-                if(message.content === `${config.prefix}web-create`){
-                        if(message.author.id != message.guild.ownerId) return message.reply("Vous n'avez pas la permission pour effectuer cette commande !")
-                        const embed = new MessageEmbed()
-                                .setTitle(messageConfig.web.webTitle)
-                                .setColor(config.embedColor)
-                                .setDescription(messageConfig.web.webDescription)
-                        const row = new MessageActionRow()
-                                .addComponents(new MessageButton()
-                                        .setCustomId('web')
-                                        .setLabel('Ouvrir un ticket')
-                                        .setEmoji('✉️')
-                                        .setStyle('PRIMARY'),
-                                )
-
-                        message.channel.send({
-                                embeds: [embed],
-                                components: [row]
-                        })
-                        message.delete()
-                }
-
-                /*
-                * Creation message et ticket commande kyolin
-                */
-                 if(message.content === `${config.prefix}kyoline-create`){
-                        if(message.author.id != message.guild.ownerId) return message.reply("Vous n'avez pas la permission pour effectuer cette commande !")
-
-                        const embed = new MessageEmbed()
-                                .setImage("https://cdn.discordapp.com/attachments/955464773397544961/955528165713903616/fond_YT.jpg")
-                                .setColor(config.embedColor)
-                        const embed2 = new MessageEmbed()
-                                .setImage("https://cdn.discordapp.com/attachments/955464773397544961/955528165416124446/banniereTJ.jpg")
-                                .setColor(config.embedColor)
-                        const embed3 = new MessageEmbed()
-                                .setImage("https://cdn.discordapp.com/attachments/955464773397544961/955528166015926352/POV-1.jpg")
-                                .setColor(config.embedColor)
-                        const embed4 = new MessageEmbed()
-                                .setTitle(messageConfig.graphiste.kyoline.kyolineTitle)
-                                .setColor(config.embedColor)
-                                .setDescription(messageConfig.graphiste.kyoline.kyolineDescription)
-                        const row = new MessageActionRow()
-                                .addComponents(new MessageButton()
-                                        .setCustomId('kyoline')
-                                        .setLabel('Ouvrir un ticket')
-                                        .setEmoji('✉️')
-                                        .setStyle('PRIMARY'),
-                                )
-
-                        message.channel.send({
-                                embeds: [embed, embed2, embed3, embed4],
-                                components: [row]
-                        })
-                        message.delete()
-                }
-
-                /*
-                * Creation message et ticket commande soon
-                */
-                if(message.content === `${config.prefix}soon-create`){
-                        if(message.author.id != message.guild.ownerId) return message.reply("Vous n'avez pas la permission pour effectuer cette commande !")
-
-                        const embed = new MessageEmbed()
-                                .setImage("https://cdn.discordapp.com/attachments/688806403539992660/955198400360497153/Antivol3.png")
-                                .setColor(config.embedColor)
-                        const embed2 = new MessageEmbed()
-                                .setImage("https://cdn.discordapp.com/attachments/688806403539992660/955198314092036096/Antivol.jpg")
-                                .setColor(config.embedColor)
-                        const embed3 = new MessageEmbed()
-                                .setImage("https://cdn.discordapp.com/attachments/688806403539992660/955198448976674856/Antivol2.jpg")
-                                .setColor(config.embedColor)
-                        const embed4 = new MessageEmbed()
-                                .setTitle(messageConfig.graphiste.soon.soonTitle)
-                                .setColor(config.embedColor)
-                                .setDescription(messageConfig.graphiste.soon.soonDescription)
-                        const row = new MessageActionRow()
-                                .addComponents(new MessageButton()
-                                        .setCustomId('soon')
-                                        .setLabel('Ouvrir un ticket')
-                                        .setEmoji('✉️')
-                                        .setStyle('PRIMARY'),
-                                )
-
-                        message.channel.send({
-                                embeds: [embed, embed2, embed3, embed4],
-                                components: [row]
-                        })
-                        message.delete()
-                }
-
-                /*
-                * Creation message et ticket commande serveur
-                */
-                if(message.content === `${config.prefix}serveur-create`){
-                        if(message.author.id != message.guild.ownerId) return message.reply("Vous n'avez pas la permission pour effectuer cette commande !")
-
-                        const embed = new MessageEmbed()
-                                .setTitle(messageConfig.serveur.serveurTitle)
-                                .setColor(config.embedColor)
-                                .setDescription(messageConfig.serveur.serveurDescription)
-                        const row = new MessageActionRow()
-                                .addComponents(new MessageButton()
-                                        .setCustomId('serveur')
-                                        .setLabel('Ouvrir un ticket')
-                                        .setEmoji('✉️')
-                                        .setStyle('PRIMARY'),
-                                )
-
-                        message.channel.send({
-                                embeds: [embed],
-                                components: [row]
-                        })
-                        message.delete()
-                }
-
-                /*
-                * Explication vente de bot discord
-                */
-                if(message.content === `${config.prefix}botInfo`){
-                        if(message.author.id != message.guild.ownerId) return message.reply("Vous n'avez pas la permission pour effectuer cette commande !")
-                        delBot = true;
-                        const embed = new MessageEmbed()
-                                .setTitle(messageConfig.botInfo.botInfoTitle)
-                                .setColor(config.embedColor)
-                                .setDescription(messageConfig.botInfo.botInfoDescription)
-
-                        message.channel.send({embeds: [embed]});
-                        message.delete();
                 }
 
 	}, del
