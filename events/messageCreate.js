@@ -67,10 +67,12 @@ module.exports = {
                 * Système de sugestion
                 */
                 if(message.channel.id == config.sugestion){
+                        if(message.author.id == message.guild.ownerId) return 
+
                         delBot = true
                         const mess = message.content
                         const author = message.author
-                        
+
                         const embed = new MessageEmbed()
                                 .setColor(config.embedColor)
                                 .setAuthor(
