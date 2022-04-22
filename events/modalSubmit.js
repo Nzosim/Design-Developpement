@@ -323,5 +323,52 @@ module.exports = {
             })
         }
 
-    }   
+    /*
+        * Ticket minecraft
+        */
+    if(modal.customId === 'NRGIX360_YT'){
+        const firstResponse = modal.getTextInputValue('type')
+        const second = modal.getTextInputValue('detail')
+        const third = modal.getTextInputValue('temps')
+
+        modal.guild.channels.create(`ticket-${modal.member.user.username}`, {
+            parent: config.ticket.categorieTicket,
+            topic: modal.member.user.id,
+            permissionOverwrites: [{
+                id: modal.member.user.id,
+                allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
+            },
+            {
+                id: modal.guild.roles.everyone,
+                deny: ['VIEW_CHANNEL'],
+            },
+            ],
+            type: 'text',
+        }).then(async c => {
+            await modal.deferReply({ ephemeral: true })
+            modal.followUp({content: `Voici votre ticket : <#${c.id}>`})
+            const embed = new MessageEmbed()
+                .setTitle("Commande Minecraft de : "+ modal.member.user.username)
+                .addField("Commande", firstResponse,true)
+                .addField("Temps", third,true)
+                .addField("Fonctionnalités", second)
+                
+                .setColor(config.embedColor)
+
+            const row = new MessageActionRow()
+                .addComponents(new MessageButton()
+                    .setCustomId('close-ticket')
+                    .setLabel('Fermer le ticket')
+                    .setStyle('DANGER'),
+                )
+
+            await c.send({
+                embeds: [embed],
+                components: [row]
+            })
+
+            modal.guild.channels.cache.get(config.log.logevents).send(`${modal.member.user.username} a ouvert un ticket : <#${c.id}>`)
+        })
+    }
+}
 }

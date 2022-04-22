@@ -290,5 +290,40 @@ client.on('interactionCreate', (interaction) => {
 
 	}
 
+	if (interaction.customId == "NRGIX360_YT"){
+	
+		const modal = new Modal() 
+		.setCustomId('NRGIX360_YT')
+		.setTitle('Commande Minecraft :')
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('type')
+			.setLabel('Que voulez vous commander ?')
+			.setStyle('SHORT') 
+			.setPlaceholder('Configuration, Skript, ...')
+			.setRequired(true) 
+		)
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('detail')
+			.setLabel('Décrivez votre demande précisément')
+			.setStyle('LONG') 
+			.setRequired(true) 
+		)
+		.addComponents(
+			new TextInputComponent()
+			.setCustomId('temps')
+			.setLabel('Pour quand le voulez-vous ?')
+			.setStyle('SHORT') 
+			.setRequired(true) 
+		)
+
+		showModal(modal, {
+			client: client, 
+			interaction: interaction 
+		})
+
+	}
+
 })
 

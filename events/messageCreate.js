@@ -134,6 +134,11 @@ module.exports = {
                                 description = messageConfig.soon.soonDescription
                                 bouton = 'soon'
                                 break
+                        case `${config.prefix}minecraft-create`:
+                                title = messageConfig.NRGIX360_YT.NRGIX360_YTTitle
+                                description = messageConfig.NRGIX360_YT.NRGIX360_YTDescription
+                                bouton = 'NRGIX360_YT'
+                                break
                         default:
                                 commande = false
                 }
@@ -164,7 +169,7 @@ module.exports = {
                                         .setEmoji('✉️')
                                         .setStyle('PRIMARY'),
                                 )
-
+                                
                         message.channel.send({
                                 embeds: [embed],
                                 components: [row]
@@ -179,8 +184,8 @@ module.exports = {
                 let title2, description2, commande2 = true
                 switch(message.content){
                         case `${config.prefix}recrutement`:
-                                title2 = messageConfig.recrutement.recrutementTitle
-                                description2 = messageConfig.recrutement.recrutementDescription
+                                title2 = messageConfig.recrutementInfo.recrutementInfoTitle
+                                description2 = messageConfig.recrutementInfo.recrutementInfoDescription
                                 break
                         case `${config.prefix}soutien-create`:
                                 title2 = messageConfig.soutien.soutienTitle

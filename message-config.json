@@ -44,5 +44,9 @@
     "botInfo":{
         "botInfoTitle":"**Pour utiliser le bot vous devez :**",
         "botInfoDescription": "**1)** Remplir le fichier `config.json` avec les informations demandés. \n**2)** Installer les modules en faisant la commande : `npm i` dans un terminal de commande\n**3)** Enregistrer les /commandes sur votre serveur avec la commande : `node .\\deploy-commands.js`\n**4)** Allumer le bot avec la commande : `node .\\index.js`\n\n**Ne pas hésiter à me mp en cas de problèmes avec le bot**"
+    },
+    "NRGIX360_YT":{
+        "NRGIX360_YTTitle":"**Shop NRGIX360_YT**",
+        "NRGIX360_YTDescription":"**__Configuration de serveur Minecraft :__**\n\n**Moyen de paiement:** PayPal\n\n**Tarifs :** \n- configuration de base + explication + conseils -> 1€ \n- configuration de base + explication + conseils + plugins -> 3€ \n\n**__Skript (plugin Minecraft) :__ **\n\nEntre 1€ à 10 € selon la difficulté\n\nJe maitrise également le transfert ftp entre le serveur et le pc et plein d'autres astuces, conseils, ...\n\n**Je ne m'occupe pas de l'hébergement des serveur**"
     }
 }
